@@ -1,0 +1,47 @@
+<h1>Article Show</h1>
+<p>
+  <strong>Title:<strong>
+  <%= @article.title %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @article.text %>
+</p>
+<p>
+  <%= link_to 'Edit article', edit_article_path %>
+</p>
+<p>
+  <%= link_to 'article列表页', articles_path %>
+</p>
+
+<h2>Comments</h2>
+<% @article.comments.each do |comment| %>
+<div>
+  <ul>
+  	<strong>用户：</strong><%= comment.username %>
+  </ul>
+  <ul>
+  	<strong>评论内容：</strong><%= comment.note %>
+  </ul>
+</div>
+<br>
+<%
+  end
+%>
+<br>
+
+<h2>留下你的足迹</h2>
+<%= form_for([@article, @article.comments.build]) do |f| %>
+  <h5>
+  	<%= f.label :username %>
+  	<%= f.text_field :username %>
+  </h5>
+  <h4>
+  	<%= f.label :note %>
+  	<%= f.text_area :note %>
+  </h4>
+  <p><%= f.submit %></p>
+<% end %>
+
+
